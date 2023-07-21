@@ -1,4 +1,8 @@
 package com.example.data.responses
 
-class SpritesPokemonService {
-}
+import com.google.gson.annotations.SerializedName
+
+data class SpritesPokemonResponse (
+    @SerializedName("sprites")
+    val sprites: Sprites
+        )

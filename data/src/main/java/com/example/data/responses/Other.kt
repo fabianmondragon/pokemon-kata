@@ -1,4 +1,10 @@
 package com.example.data.responses
 
-class Other {
-}
+import OfficialArtwork
+import com.google.gson.annotations.SerializedName
+
+data class Other (
+    @SerializedName("official-artwork")
+    val officialArtwork: OfficialArtwork
+)
+

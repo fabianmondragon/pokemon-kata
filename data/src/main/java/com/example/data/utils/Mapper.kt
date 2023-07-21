@@ -9,11 +9,10 @@ class MapperDataPokemon {
         fun <From, To> createMapper(mappingFunction: (From) -> To): Mapper<From, To> {
             return mappingFunction
         }
-
         fun convertPokemonListResponseToPokemonListEntity(pokemonListResponse: PokemonListResponse): MutableList<PokemonItemEntity> {
             val pokemonListEntity : MutableList<PokemonItemEntity> = mutableListOf()
             pokemonListResponse.results.forEach{
-                pokemonListEntity.add(PokemonItemEntity(name = it.name, url = it.url))
+                pokemonListEntity.add(PokemonItemEntity(name = it.name, url = it.url, image = it.image))
             }
             return pokemonListEntity
         }
