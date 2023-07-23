@@ -76,10 +76,17 @@ dependencies {
 
     // hilt
     implementation("com.google.dagger:hilt-android:2.46")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
     kapt("com.google.dagger:hilt-android-compiler:2.46")
+
+    // load image
+    implementation ("io.coil-kt:coil-compose:1.3.1")
 
     // coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+
+    // navigation
+    implementation("androidx.navigation:navigation-compose:2.6.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
