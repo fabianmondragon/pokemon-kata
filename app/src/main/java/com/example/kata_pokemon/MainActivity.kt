@@ -4,22 +4,23 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.example.kata_pokemon.ui.fragment.PokemonDetailFragment
 import com.example.kata_pokemon.ui.fragment.PokemonListFragment
+import com.example.kata_pokemon.ui.fragment.goToDetailOfPokemon
 import com.example.kata_pokemon.ui.theme.KatapokemonTheme
 import com.example.kata_pokemon.utils.Route
-import com.example.kata_pokemon.viewmodels.PokemonViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -42,7 +43,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun setupNavigation() {
-    var navController =  rememberNavController()
+    var navController = rememberNavController()
     NavHost(
         navController = navController,
         startDestination = Route.List.route
@@ -52,14 +53,26 @@ fun setupNavigation() {
             route = Route.List.route
         )
         {
-            goToPokemonList()
+            goToPokemonList(navController)
+        }
+        composable(
+            route = "${Route.Detail.route}/{parameter}",
+            arguments = listOf(navArgument("parameter") { type = NavType.StringType })
+        )
+        { navBackStackEntry ->
+            val parameter = navBackStackEntry.arguments?.getString("parameter")
+            parameter?.let { parameter ->
+                PokemonDetailFragment(nameOfPokemon = parameter)
+            }
+
+
         }
     }
 }
 
 @Composable
-fun goToPokemonList(){
-    PokemonListFragment()
+fun goToPokemonList(navController: NavController) {
+    PokemonListFragment(navController = navController)
 }
 
 @Preview(showBackground = true)

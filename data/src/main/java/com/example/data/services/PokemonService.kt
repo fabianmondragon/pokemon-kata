@@ -1,5 +1,6 @@
 package com.example.data.services
 
+import com.example.data.responses.DetailPokemonResponse
 import com.example.data.responses.PokemonListResponse
 import com.example.data.responses.SpritesPokemonResponse
 import retrofit2.Response
@@ -16,6 +17,6 @@ interface PokemonService {
     ): Response<PokemonListResponse>
 
     @GET("pokemon/{name}")
-    suspend fun getPokemon(@Path("name") name: String): SpritesPokemonResponse
+    suspend fun getDetailOfPokemon(@Path("name") name: String): Response<DetailPokemonResponse>
 
 }

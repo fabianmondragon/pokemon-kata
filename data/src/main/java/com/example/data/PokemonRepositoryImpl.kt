@@ -26,4 +26,20 @@ class PokemonRepositoryImpl
         }
         return transformedData
     }
+
+    override suspend fun getDetailOfPokemon(pokemon: String): Flow<PokemonResponse<Any?>> {
+
+        val transformedData = remoteDataSource.getDetailOfPokemon(pokemon).map { response ->
+            when (response) {
+                is PokemonResponse.Success -> {
+                    val responseEntity =
+                        MapperDataPokemon.convertDetailPokemonResponseToDetailPokemonEntity(response.data!!)
+                    PokemonResponse.Success(responseEntity)
+                }
+                else -> response
+            }
+        }
+        return transformedData
+    }
+
 }

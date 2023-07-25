@@ -1,5 +1,6 @@
 package com.example.data.datasources
 
+import com.example.data.responses.DetailPokemonResponse
 import com.example.data.responses.PokemonListResponse
 import com.example.data.responses.SpritesPokemonResponse
 import com.example.domain.models.PokemonResponse
@@ -30,19 +31,22 @@ class RemoteDataSourceImpl @Inject constructor(
         }
     }
 
-    private fun getImage(url:String): String {
+    private fun getImage(url: String): String {
         val index = url.split("/".toRegex()).dropLast(1).last()
         return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$index.png"
     }
 
-    override suspend fun getSpritesPokemon(): Flow<SpritesPokemonResponse> {
-        return flow{
-
+    override suspend fun getDetailOfPokemon(name: String): Flow<PokemonResponse<DetailPokemonResponse?>> {
+        val response = pokemonService.getDetailOfPokemon(name)
+        if (response.isSuccessful) {
+            return flow {
+                emit(PokemonResponse.Success(response.body()))
+            }
         }
-    }
-
-    override suspend fun getPokemon(name: String): SpritesPokemonResponse {
-        return pokemonService.getPokemon(name)
+        val error = IOException("Error ${response.code()}: ${response.message()}")
+        return flow {
+            emit(PokemonResponse.Error(error))
+        }
     }
 
 

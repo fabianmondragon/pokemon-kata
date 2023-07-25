@@ -5,11 +5,9 @@ import com.example.domain.repository.PokemonRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class PokemonListUseCase @Inject constructor (private val pokemonRepository: PokemonRepository) {
+class PokemonListUseCase @Inject constructor(private val pokemonRepository: PokemonRepository) {
 
     suspend fun getPokemonList(): Flow<PokemonResponse<Any?>> {
         return pokemonRepository.getListPokemon()
     }
-
-
 }
