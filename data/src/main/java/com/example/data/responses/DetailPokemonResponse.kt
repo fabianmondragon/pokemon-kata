@@ -19,5 +19,9 @@ data class DetailPokemonResponse(
     val types: List<Type>,
 
     @SerializedName("weight")
-    val weight: Int
+    val weight: Int,
+
+    @SerializedName("id")
+    val id: String
+
 )

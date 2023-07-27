@@ -20,9 +20,8 @@ fun PokemonListFragment(
     showPokemonListScreen(listOfPokemons, ::goToDetailOfPokemon, navController)
 }
 
-
 fun goToDetailOfPokemon(itemEntity: PokemonItemEntity? = null, navController: NavController) {
     if (itemEntity != null) {
-        navController.navigate("${Route.Detail.route}/${itemEntity.name}")
+        navController.navigate("${Route.Detail.route}/${itemEntity.name}/${itemEntity.id}")
     }
 }

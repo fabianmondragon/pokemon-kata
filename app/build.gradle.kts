@@ -1,9 +1,8 @@
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id ("com.google.dagger.hilt.android")
-    id ("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -25,7 +24,10 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
@@ -80,7 +82,8 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.46")
 
     // load image
-    implementation ("io.coil-kt:coil-compose:1.3.1")
+    implementation("io.coil-kt:coil-compose:1.4.0")
+    implementation("io.coil-kt:coil-svg:1.4.0")
 
     // coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")

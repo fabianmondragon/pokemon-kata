@@ -1,8 +1,6 @@
 package com.example.data.services
 
-import com.example.data.responses.DetailPokemonResponse
-import com.example.data.responses.PokemonListResponse
-import com.example.data.responses.SpritesPokemonResponse
+import com.example.data.responses.*
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -16,7 +14,16 @@ interface PokemonService {
         @Query("limit") limit: Int
     ): Response<PokemonListResponse>
 
-    @GET("pokemon/{name}")
-    suspend fun getDetailOfPokemon(@Path("name") name: String): Response<DetailPokemonResponse>
+    @GET("pokemon/{id}")
+    suspend fun getDetailOfPokemon(@Path("id") name: String): Response<DetailPokemonResponse>
+
+    @GET("pokemon-species/{id}")
+    suspend fun getSpecies(@Path("id") id: String): Response<SpeciesResponse>
+
+    @GET("evolution-chain/{id}")
+    suspend fun getEvolutionChain(@Path("id") id: String): Response<EvolutionChainResponse>
+
+    @GET("pokemon/{id}/encounters")
+    suspend fun getLocations(@Path("id") id: String): Response<List<LocationResponse>>
 
 }

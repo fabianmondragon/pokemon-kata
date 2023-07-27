@@ -56,13 +56,21 @@ fun setupNavigation() {
             goToPokemonList(navController)
         }
         composable(
-            route = "${Route.Detail.route}/{parameter}",
-            arguments = listOf(navArgument("parameter") { type = NavType.StringType })
+            route = "${Route.Detail.route}/{parameter}/{pokemonId}",
+            arguments = listOf(
+                navArgument("parameter") { type = NavType.StringType },
+                navArgument("pokemonId") { type = NavType.StringType }
+
+            )
         )
         { navBackStackEntry ->
             val parameter = navBackStackEntry.arguments?.getString("parameter")
+            val pokemonId = navBackStackEntry.arguments?.getString("pokemonId")
             parameter?.let { parameter ->
-                PokemonDetailFragment(nameOfPokemon = parameter)
+                pokemonId.let {
+                    PokemonDetailFragment(nameOfPokemon = parameter, pokemonId = it!!)
+                }
+
             }
 
 
