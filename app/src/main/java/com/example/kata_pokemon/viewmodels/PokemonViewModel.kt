@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PokemonViewModel @Inject constructor(private val pokemonListUseCase: PokemonListUseCase) :
+open class PokemonViewModel @Inject constructor(private val pokemonListUseCase: PokemonListUseCase) :
     ViewModel() {
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
@@ -22,7 +22,8 @@ class PokemonViewModel @Inject constructor(private val pokemonListUseCase: Pokem
     val listState = _listState.asStateFlow()
     fun getPokemons() {
         coroutineScope.launch {
-            pokemonListUseCase.getPokemonList().collect { response ->
+            pokemonListUseCase.getPokemonList()
+                .collect { response ->
                 when (response) {
                     is PokemonResponse.Success -> {
                         val result = response.data as List<PokemonItemEntity>

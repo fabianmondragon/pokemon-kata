@@ -21,6 +21,7 @@ android {
         }
     }
 
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
@@ -53,7 +54,13 @@ android {
             excludes.add("/META-INF/{AL2.0,LGPL2.1}")
         }
     }
+
 }
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
 
 dependencies {
     val compose_version = "1.2.0"
@@ -93,7 +100,16 @@ dependencies {
     // navigation
     implementation("androidx.navigation:navigation-compose:2.6.0")
 
-    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
+    testCompileOnly("junit:junit:4.13")
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2")
+    testImplementation("org.mockito:mockito-core:3.11.2")
+    testImplementation("org.mockito:mockito-inline:3.11.2")
+    testImplementation("org.mockito:mockito-junit-jupiter:3.11.2")
+
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:$compose_version")
