@@ -74,7 +74,9 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.3.1")
     implementation("androidx.compose.ui:ui:$compose_version")
     implementation("androidx.compose.ui:ui-tooling-preview:$compose_version")
-    implementation("androidx.compose.material3:material3:1.0.0-alpha11")
+    implementation("androidx.compose.material3:material3:1.1.1")
+    implementation("androidx.compose.material:material-icons-extended:1.4.3")
+
 
     // hilt
     implementation("com.google.dagger:hilt-android:2.46")
